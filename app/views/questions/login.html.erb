@@ -1,0 +1,33 @@
+<h1>ログイン</h1>
+<p style="color:Red"><%= @error %></p>
+<%= form_tag action: :auth do %>
+        <div class="field">
+            <%= label_tag :username,'ユーザ名' %>:<br />
+            <%= text_field_tag :username,'',size:20 %>
+        </div>
+        <div class="field">
+            <%= label_tag :password,'パスワード' %><br />
+            <%= password_field_tag :password,'',size:20 %>
+        </div>
+<!-- ログイン後のリダイレクトアクション -->
+<%= hidden_field_tag :referer, flash[:referer] %>
+<%= submit_tag 'ログイン' %>
+<% end %>
+<hr>
+<h1>新規登録</h1>
+<p style="color:Red"><%= @registerror %></p>
+<%= form_tag action: :regist do %>
+        <div class="field">
+            <%= label_tag :username,'ユーザ名' %>:<br />
+            <%= text_field_tag :username,'',size:20 %>
+        </div>
+        <div class="field">
+            <%= label_tag :password,'パスワード' %><br />
+            <%= password_field_tag :password,'',size:20 %>
+        </div>
+        <div class="field">
+            <%= label_tag :email,'email' %><br />
+            <%= text_field_tag :email,'',size:40 %>
+        </div>
+<%= submit_tag 'ユーザ登録' %>
+<% end %>

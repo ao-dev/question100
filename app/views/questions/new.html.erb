@@ -1,0 +1,19 @@
+<body onLoad="document.getElementById('question_content').focus()">
+
+    <a href="index">TOPへ戻る</a><br>
+
+<h2><%= @title[:title] %></h2>
+<%= form_for @question do |f| %>
+    <%= f.hidden_field :no, :value => @no %>
+    <%= f.label :回答 %>
+<%= f.text_field :content ,:size => "20x1"%>
+    <%= f.submit :追加%>
+<% end %>
+    
+<ol reversed >
+<% @questions.each do |question| %>
+    <li><%= question.content %>&nbsp;&nbsp;&nbsp;
+        <small><a href="q_delete?no=<%=@title[:id]%>&id=<%=question.id%>">削除</a></small>
+    </li> <br/>
+<% end %>
+</ol>
