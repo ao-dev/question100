@@ -43,7 +43,7 @@ class QuestionsController < ApplicationController
       if question != nil then
           title = Title.find(question[:title_id])  rescue nil
           if check_auth(title) then
-            Question.find_by(params[:id]).destroy
+            question.destroy
             redirect_to '/questions/new?no='+params[:no]
           end
       end

@@ -1,10 +1,9 @@
 <body onLoad="document.getElementById('new_title').focus()">
 <%= image_tag 'alien.png' %>
-<h1 style="display:inline;">100個考える　DEV</h1>　&nbsp;&nbsp;[<%= @user[:username] %>]さん
+<h1 style="display:inline;">100個考える</h1>　&nbsp;&nbsp;[<%= @user[:username] %>]さん
     &nbsp;&nbsp;<small><a href="logout">ログアウト</a></small>
 
-    <hr>
-
+<hr>
 <%= form_for(@title, :url => {:controller => :questions ,:action => :add}) do |f| %>
     <%= f.label :テーマ %>
     <%= f.text_field :title ,:size =>'20x1' %>
@@ -15,7 +14,7 @@
 <% @titles.each do |title_list| %>
     <li>
         <b><a href="new?no=<%=title_list.id%>"><%= title_list.title %></a></b>
-        &nbsp;&nbsp;<small><a href="output_csv.csv?no=<%=title_list.id%>">csv出力</a></small>
+        &nbsp;&nbsp;<small><a href="output_csv.csv?no=<%=title_list.id%>">ダウンロード</a></small>
         &nbsp;&nbsp;<small><a href="delete?no=<%=title_list.id%>">削除</a></small>
         </li><br/>
 <% end %>
