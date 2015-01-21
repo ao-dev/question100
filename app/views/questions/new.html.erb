@@ -6,7 +6,7 @@
 <%= form_for @question do |f| %>
     <%= f.hidden_field :no, :value => @no %>
     <%= f.label :回答 %>
-<%= f.text_field :content ,:size => "20x1"%>
+<%= f.text_field :content ,:size => "40x1"%>
     <%= f.submit :追加%>
 <% end %>
     

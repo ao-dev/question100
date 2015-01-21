@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
     before_action :check_logined,  only: [:index , :new, :delete, :add, :create,:q_delete]
-     #TODO Git
      #TODO mail
     
  def index
