@@ -1,10 +1,10 @@
 <body onLoad="document.getElementById('question_content').focus()">
 <%= image_tag 'alien.png' %>
     <h1 style="display:inline;">100個考える</h1>　&nbsp;&nbsp;[<%= @user[:username] %>]さん
-    &nbsp;&nbsp;<a href="index">TOPへ戻る</a><br>
+    &nbsp;&nbsp;<a href="index">戻る</a><br>
 <hr>
 
-<h2><%= @title[:title] %></h2>
+<h2><%= @title[:title] %> って？</h2>
 <%= form_for @question do |f| %>
     <%= f.hidden_field :no, :value => @no %>
     <%= f.label :回答 %>
@@ -15,7 +15,9 @@
 <ol reversed >
 <% @questions.each do |question| %>
     <li><%= question.content %>&nbsp;&nbsp;&nbsp;
-        <small><a href="q_delete?no=<%=@title[:id]%>&id=<%=question.id%>">削除</a></small>
+        <small>
+            <%= link_to "削除", {:controller => "questions", :action => "q_delete",:id => question}, data: {confirm: "本当に削除しますか？"}%>
+        </small>
     </li> <br/>
 <% end %>
 </ol>

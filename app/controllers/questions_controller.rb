@@ -28,11 +28,11 @@ class QuestionsController < ApplicationController
 
   def delete      
       #問　回答削除
-      title = Title.find(params[:no])  rescue nil
+      title = Title.find(params[:id])  rescue nil
       #権限チェック
       if check_auth(title) then
           title.destroy
-          redirect_to '/questions/index'
+          redirect_to controller: 'questions', action: 'index'
       end
   end
 
@@ -43,19 +43,19 @@ class QuestionsController < ApplicationController
       if question != nil then
           title = Title.find(question[:title_id])  rescue nil
           if check_auth(title) then
-            question.destroy
-            redirect_to '/questions/new?no='+params[:no]
+              question.destroy
+              redirect_to controller: 'questions', action: 'new', no: title[:id]
           end
       end
   end
     
   def add
       #問追加
-      @title = Title.new
+      @title = Title.new()
       @title.title = params[:title][:title]
       @title.user_id = session[:usr]
       @title.save  
-      redirect_to  '/questions/index'
+      redirect_to controller: 'questions', action: 'index'
   end
 
     def create
@@ -65,7 +65,7 @@ class QuestionsController < ApplicationController
       @question.title_id = params[:question][:no]
       @question.content = params[:question][:content]
       @question.save  
-      redirect_to '/questions/new?no='+@no
+      redirect_to controller: 'questions', action: 'new', no: @no
   end
 
     def regist
@@ -79,7 +79,7 @@ class QuestionsController < ApplicationController
             User.regist(params[:username],params[:password],params[:email])
             usr = User.authenticate(params[:username],params[:password])
             session[:usr] = usr.id        
-            redirect_to '/questions/index'
+            redirect_to controller: 'questions', action: 'index'
         end
     end
 
@@ -91,7 +91,7 @@ class QuestionsController < ApplicationController
             session[:usr] = usr.id
             #全部Indexに飛ばす
             #redirect_to params[:referer]
-            redirect_to '/questions/index'
+            redirect_to controller: 'questions', action: 'index'
         else
             flash.now[:referer] = params[:referer]
             @error= 'ユーザ名/パスワードが間違っています'
@@ -102,7 +102,7 @@ class QuestionsController < ApplicationController
     def logout
         #ログアウト
         reset_session
-        redirect_to '/questions/index'
+        redirect_to controller: 'questions', action: 'index'
     end    
 
     def output_csv
