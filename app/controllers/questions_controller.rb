@@ -57,7 +57,11 @@ class QuestionsController < ApplicationController
           title = Title.find(question[:title_id])  rescue nil
           if check_auth(title) then
               #ステータス更新
-              question.status = !question.status
+              if question.status then
+                  question.status = false
+              else
+                  question.status = true
+              end
               question.save
               redirect_to controller: 'questions', action: 'new', no: title[:id]
           end
