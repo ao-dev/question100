@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
       #権限チェック
       if check_auth(@title) then
           @no = params[:no]
-          @questions = Question.where(title_id:params[:no]).order('id desc')
+          @questions = Question.where(title_id:params[:no]).order('id desc') 
           @question = Question.new
           @delete = Title.new
       end
@@ -48,6 +48,21 @@ class QuestionsController < ApplicationController
           end
       end
   end
+
+  def q_update    
+      #回答ステータス変更
+      question = Question.find(params[:id])  rescue nil
+      #権限チェック
+      if question != nil then
+          title = Title.find(question[:title_id])  rescue nil
+          if check_auth(title) then
+              #ステータス更新
+              question.status = !question.status
+              question.save
+              redirect_to controller: 'questions', action: 'new', no: title[:id]
+          end
+      end
+  end
     
   def add
       #問追加
@@ -64,6 +79,7 @@ class QuestionsController < ApplicationController
       @question = Question.new
       @question.title_id = params[:question][:no]
       @question.content = params[:question][:content]
+      @question.status = false
       @question.save  
       redirect_to controller: 'questions', action: 'new', no: @no
   end

@@ -1,0 +1,6 @@
+      invoke  active_record
+      create    db/migrate/20150130075448_create_questions.rb
+      create    app/models/question.rb
+      invoke    test_unit
+      create      test/models/question_test.rb
+      create      test/fixtures/questions.yml

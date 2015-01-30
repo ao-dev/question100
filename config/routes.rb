@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   match 'questions/add', :to => 'questions#add' ,:via => :post   
   match 'questions/delete', :to => 'questions#delete' ,:via => :get   
   match 'questions/q_delete', :to => 'questions#q_delete' ,:via => :get   
+  match 'questions/q_update', :to => 'questions#q_update' ,:via => :get   
   match 'questions', :to => 'questions#create' ,:via => :post   
   match 'questions/login', :to => 'questions#login' ,:via => :get
   match 'questions/auth', :to => 'questions#auth' ,:via => :post   

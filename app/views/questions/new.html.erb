@@ -14,8 +14,17 @@
     
 <ol reversed >
 <% @questions.each do |question| %>
-    <li><%= question.content %>&nbsp;&nbsp;&nbsp;
+
+    <li>
+        <% if  question.status then %>
+            <s><%= question.content %></s>
+        <% else %>
+            <%= question.content %>
+        <% end %>
+        &nbsp;&nbsp;&nbsp;
         <small>
+            <%= link_to "チェック", {:controller => "questions", :action => "q_update",:id => question}%>
+
             <%= link_to "削除", {:controller => "questions", :action => "q_delete",:id => question}, data: {confirm: "本当に削除しますか？"}%>
         </small>
     </li> <br/>
